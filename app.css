@@ -1,0 +1,9 @@
+body {
+  background: #aaaaaa
+}
+
+.troll {
+  width: 394px;
+  height: 320px;
+  background-image: url('images/troll.png');
+}
