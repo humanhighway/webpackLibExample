@@ -3,8 +3,6 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     gulpWebpack = require('gulp-webpack');
 
-var deployPath = "common";
-
 // compile ls to js
 gulp.task('livescript', function() {
     return gulp.src('./ls/**/*.ls')
@@ -13,18 +11,20 @@ gulp.task('livescript', function() {
         .pipe(gulp.dest('./js'));
 });
 
-// for developer test and compile
-gulp.task('default', ['webpack-app-build', 'webpack-lib-build'], function(){
-});
-
+// build webpack for lib
 gulp.task('webpack-lib-build', ['livescript'], function() {
     gulp.src("./js/lib.js")
         .pipe(gulpWebpack(require('./webpack.config.js')))
         .pipe(gulp.dest("./js/common"));
 });
 
+// build webpack for main app
 gulp.task('webpack-app-build', ['livescript'], function() {
     gulp.src("./js/app.js")
         .pipe(gulpWebpack(require('./webpack-app.config.js')))
         .pipe(gulp.dest("./js"));
+});
+
+
+gulp.task('default', ['webpack-app-build', 'webpack-lib-build'], function(){
 });
